@@ -1,7 +1,5 @@
-import React from 'react';
-
+// import React from 'react';
 import './App.scss';
-
 // Let's talk about using index.js and some other name in the component folder.
 // There's pros and cons for each way of doing this...
 // OFFICIALLY, we have chosen to use the Airbnb style guide naming convention.
@@ -10,20 +8,15 @@ import Header from './Components/Header';
 import Footer from './Components/Footer';
 import Form from './Components/Form';
 import Results from './Components/Results';
+import { useState } from 'react';
 
 function App() {
 const [data, setdata] = useState(null);
 const [requestParams, setRequestParams] = useState({});
-
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     data: null,
-  //     requestParams: {},
-  //   };
-  // }
+const [loading, setLoading] = useState(false);
 
  const callApi = (requestParams) => {
+  setLoading(true);
     // mock output
     const data = {
       count: 2,
@@ -35,17 +28,17 @@ const [requestParams, setRequestParams] = useState({});
 
     setdata(data);
     setRequestParams(requestParams);
+    setLoading(false);
   }
-
-    return (
-      <React.Fragment>
+  return (
+      <>
         <Header />
-        <div>Request Method: {this.state.requestParams.method}</div>
-        <div>URL: {this.state.requestParams.url}</div>
+        <div data-testid="app-div-method">Request Method: {requestParams.method}</div>
+        <div data-testid="app-div-url">URL: {requestParams.url}</div>
         <Form handleApiCall={callApi} />
-        <Results data={data} />
+        <Results data={data} loading={loading}/>
         <Footer />
-      </React.Fragment>
+      </>
     );
 
 }

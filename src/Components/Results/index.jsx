@@ -1,12 +1,24 @@
-import React from 'react';
+// import React from 'react';
 import './Results.scss';
+import JSONPretty from 'pretty-json-pretty';
+import JSONPrettyMonikaiTheme from 'react-jsonpretty/dist/monikai';
 
-function Results(props){
-  return(
+function Results({ data, loading }) {
+  return (
     <section>
-    <pre>{props.data ? JSON.stringify(props.data, undefined, 2) : null}</pre>
-  </section>
-  )
+      {
+        loading ? <p>Loading...</p> :
+
+          <pre data-testid="results-pre">
+            {
+              data
+                ? <JSONPretty data={data} theme={JSONPrettyMonikaiTheme}></JSONPretty>
+                : null
+            }
+          </pre>
+      }
+    </section>
+  );
 }
 export default Results;
 
