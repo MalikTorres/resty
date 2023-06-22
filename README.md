@@ -13,7 +13,7 @@ Restful API testing application
 [Will be added]()
 
 ### Collaborators
-I referenced Ryan Gallaways demo
+I referenced Ryan Gallaways demo and AI for testing
 
 ### Setup
 
