@@ -40,3 +40,6 @@ to run tests, after running `npm i`, run the command `npm test`
 ![UML image](./assets/uml.png)
 
 
+Lab 27 UML
+
+![UML image](./assets/27uml.png)
