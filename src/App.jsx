@@ -8,21 +8,22 @@ import Header from './Components/Header';
 import Footer from './Components/Footer';
 import Form from './Components/Form';
 import Results from './Components/Results';
-import { useState } from 'react';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 function App() {
-const [data, setdata] = useState(null);
-const [requestParams, setRequestParams] = useState({});
-const [loading, setLoading] = useState(false);
+  const [data, setdata] = useState(null);
+  const [requestParams, setRequestParams] = useState({});
+  const [loading, setLoading] = useState(false);
 
- const callApi = (requestParams) => {
-  setLoading(true);
+  const callApi = (requestParams) => {
+    setLoading(true);
     // mock output
     const data = {
       count: 2,
       results: [
-        {name: 'fake thing 1', url: 'http://fakethings.com/1'},
-        {name: 'fake thing 2', url: 'http://fakethings.com/2'},
+        { name: 'fake thing 1', url: 'http://fakethings.com/1' },
+        { name: 'fake thing 2', url: 'http://fakethings.com/2' },
       ],
     };
 
@@ -30,16 +31,24 @@ const [loading, setLoading] = useState(false);
     setRequestParams(requestParams);
     setLoading(false);
   }
+  useEffect(() => {
+    async function getData() {
+      let response = await axios.get('https://pokeapi.co/api/v2/pokemon');
+      setdata(response.data.results);
+    }
+    getData();
+  }, [requestParams]);
+
   return (
-      <>
-        <Header />
-        <div data-testid="app-div-method">Request Method: {requestParams.method}</div>
-        <div data-testid="app-div-url">URL: {requestParams.url}</div>
-        <Form handleApiCall={callApi} />
-        <Results data={data} loading={loading}/>
-        <Footer />
-      </>
-    );
+    <>
+      <Header />
+      <div data-testid="app-div-method">Request Method: {requestParams.method}</div>
+      <div data-testid="app-div-url">URL: {requestParams.url}</div>
+      <Form handleApiCall={callApi} />
+      <Results data={data} loading={loading} />
+      <Footer />
+    </>
+  );
 
 }
 
