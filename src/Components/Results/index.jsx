@@ -1,7 +1,7 @@
 // import React from 'react';
 import './Results.scss';
-import JSONPretty from 'pretty-json-pretty';
-import JSONPrettyMonikaiTheme from 'react-jsonpretty/dist/monikai';
+import JSONPretty from 'react-json-pretty';
+import JSONPrettyMonikaiTheme from 'react-json-pretty/dist/monikai';
 
 function Results({ data, loading }) {
   return (

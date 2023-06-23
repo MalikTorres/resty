@@ -26,8 +26,8 @@ const [method, setMethod] = useState('');
         <label className="methods">
           <span id="get" onClick={(e) => setMethod('GET')}>GET</span>
           <span id="post" onClick={(e) => setMethod('POST')}>POST</span>
-          <span id="put">PUT</span>
-          <span id="delete">DELETE</span>
+          <span id="put" onClick={(e) => setMethod('PUT')}>PUT</span>
+          <span id="delete"onClick={(e) => setMethod('DELETE')}>DELETE</span>
         </label>
       </form>
     </>
