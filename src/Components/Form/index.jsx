@@ -2,6 +2,7 @@
 import{ useState } from 'react';
 import './Form.scss';
 
+
 function Form(props) {
 const [url, setUrl] = useState('');
 const [method, setMethod] = useState('');
@@ -12,6 +13,7 @@ const [data, setData] = useState('');
     const formData = {
       method,
       url,
+      data
     };
     props.handleApiCall(formData);
   }

@@ -49,4 +49,4 @@ Lab 28 UML
 
 
 LAB 29 UML
-![UML image](./assets/27uml.png)
+![UML image](./assets/lab29.png)
