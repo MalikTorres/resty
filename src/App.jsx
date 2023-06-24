@@ -17,38 +17,37 @@ function App() {
   const [loading, setLoading] = useState(false);
 
   const callApi = (requestParams) => {
-    setLoading(true);
-    // mock output
-    const data = {
-      count: 2,
-      results: [
-        { name: 'fake thing 1', url: 'http://fakethings.com/1' },
-        { name: 'fake thing 2', url: 'http://fakethings.com/2' },
-      ],
-    };
-
-    setdata(data);
     setRequestParams(requestParams);
-    setLoading(false);
+
   }
   useEffect(() => {
-    async function getData() {
-      let response = await axios.get('https://pokeapi.co/api/v2/pokemon');
-      setdata(response.data.results);
-    }
-    getData();
-  }, [requestParams]);
+    try {
+      const getData = async () => {
+        if (requestParams.method && requestParams.url) {
+          setLoading(true);
+          let response = await axios(requestParams);
+          let results = response.data
+          setdata(results);
+          setLoading(false);
+        }
+      }
+      getData();
+  } catch (e) {
+    setdata('no data avaliable');
+  }
+  // When request params is changed
+}, [requestParams]);
 
-  return (
-    <>
-      <Header />
-      <div data-testid="app-div-method">Request Method: {requestParams.method}</div>
-      <div data-testid="app-div-url">URL: {requestParams.url}</div>
-      <Form handleApiCall={callApi} />
-      <Results data={data} loading={loading} />
-      <Footer />
-    </>
-  );
+return (
+  <>
+    <Header />
+    <div data-testid="app-div-method">Request Method: {requestParams?.method?.toUpperCase()}</div>
+    <div data-testid="app-div-url">URL: {requestParams.url}</div>
+    <Form handleApiCall={callApi} />
+    <Results data={data} loading={loading} />
+    <Footer />
+  </>
+);
 
 }
 
