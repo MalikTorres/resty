@@ -9,13 +9,27 @@ import Footer from './Components/Footer';
 import Form from './Components/Form';
 import Results from './Components/Results';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useReducer } from 'react';
+
+ const initialState = {
+ data: null,
+  requestParams: {},
+  loading: false
+ }
+
+
+// function reducer(state, action) {
+//   switch(action.type) {
+//     case 'data':
+//       return  {}
+//   }
+// }
 
 function App() {
+  const [state, dispatch] = useReducer(reducer,{ count:0});
   const [data, setdata] = useState(null);
   const [requestParams, setRequestParams] = useState({});
   const [loading, setLoading] = useState(false);
-
   const callApi = (requestParams) => {
     setRequestParams(requestParams);
 
